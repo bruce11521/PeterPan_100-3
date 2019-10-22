@@ -13,6 +13,7 @@
 		4E3D498A235EE01A0075AD67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E3D4989235EE01A0075AD67 /* Assets.xcassets */; };
 		4E3D498D235EE01A0075AD67 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E3D498C235EE01A0075AD67 /* Preview Assets.xcassets */; };
 		4E3D4990235EE01A0075AD67 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E3D498E235EE01A0075AD67 /* LaunchScreen.storyboard */; };
+		4E3D4998235EE1880075AD67 /* QuestionDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3D4997235EE1880075AD67 /* QuestionDataBase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		4E3D498C235EE01A0075AD67 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4E3D498F235EE01A0075AD67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4E3D4991235EE01A0075AD67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E3D4997235EE1880075AD67 /* QuestionDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionDataBase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				4E3D4989235EE01A0075AD67 /* Assets.xcassets */,
 				4E3D498E235EE01A0075AD67 /* LaunchScreen.storyboard */,
 				4E3D4991235EE01A0075AD67 /* Info.plist */,
+				4E3D4997235EE1880075AD67 /* QuestionDataBase.swift */,
 				4E3D498B235EE01A0075AD67 /* Preview Content */,
 			);
 			path = "PeterPan_100#3";
@@ -148,6 +151,7 @@
 			files = (
 				4E3D4984235EE0190075AD67 /* AppDelegate.swift in Sources */,
 				4E3D4986235EE0190075AD67 /* SceneDelegate.swift in Sources */,
+				4E3D4998235EE1880075AD67 /* QuestionDataBase.swift in Sources */,
 				4E3D4988235EE0190075AD67 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,6 +299,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "L.B.PeterPan-100-3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -315,6 +320,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "L.B.PeterPan-100-3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
