@@ -11,7 +11,7 @@ import SwiftUI
 struct BtnStyle: ViewModifier{
     func body(content: Content) -> some View{
         return content
-        .font(.title)
+        .font(.headline)
         
         .padding()
         .foregroundColor(Color.black)
@@ -26,7 +26,6 @@ struct LabelStyle: ViewModifier{
     func body(content: Content) -> some View{
         return content
         .font(.title)
-        
         .padding()
         .foregroundColor(Color.black)
             .overlay(RoundedRectangle(cornerRadius: 50).stroke(Color.white, lineWidth: 5))
@@ -42,42 +41,40 @@ struct LabelStyle: ViewModifier{
 
 
 struct ContentView: View {
+    let targetQusNum = 10
     @State var cycleNum = 0
+    @State var indexNum = 0
     @State var answerStrNum = 99
     @State var questionImageNum = 0
     @State var answerImageNum = 99
     @State var randomNum = 0
     @State var choiceNum = [Int]()
-    @State var numArray = [Int]()
+    //@State var numArray = [Int]()
     var body: some View {
         VStack{
             HStack {
-                Text("猜猜我是誰?").modifier(LabelStyle())
+                Spacer()
+                Text("(\(cycleNumStr()))猜猜我是誰?").modifier(LabelStyle())
+                Spacer()
                 Image(imageNameArray(ImageNum: questionImageNum))
-                .resizable()
-                .frame(width: 114, height: 200)
-                .cornerRadius(1)
+                    .resizable()
+                    .frame(width: 114, height: 200)
+                    .cornerRadius(1)
+                    .padding(.top, 40)
+                Spacer()
                 
             }
             Spacer()
-            HStack{
-                Spacer()
-                Button(action: {
-                    self.resetBtn()
-                }) {
-                    Text("Reset!")
-                        .fontWeight(.bold)
-                }.modifier(BtnStyle())
-                Spacer()
-                //Text("\(choiceStr())").modifier(LabelStyle())
-                //Spacer()
-            }
+            
             HStack {
+                Spacer()
                 Image(imageNameArray(ImageNum: answerImageNum))
-                .resizable()
-                .frame(width: 114, height: 200)
-                .cornerRadius(1)
+                    .resizable()
+                    .frame(width: 114, height: 200)
+                    .cornerRadius(1)
+                Spacer()
                 Text("\(ArcanaArray(answerStrNum, langIsCht: true))").modifier(LabelStyle())
+                Spacer()
             }
             Spacer()
             HStack(alignment: .bottom){
@@ -89,6 +86,13 @@ struct ContentView: View {
                 }.modifier(BtnStyle())
                 Spacer()
                 Button(action: {
+                    self.resetBtn()
+                }) {
+                    Text("Reset")
+                        .fontWeight(.bold)
+                }.modifier(BtnStyle())
+                Spacer()
+                Button(action: {
                     self.nextBtn()
                 }) {
                     Text("Next")
@@ -96,7 +100,7 @@ struct ContentView: View {
                 }.modifier(BtnStyle())
             }
             
-        }.background(Image("TarotBackSide").resizable().scaledToFill(), alignment: .center)
+        }.background(Image("tarotBG").resizable().scaledToFill(), alignment: .center)
         
     }//body End
     func answerBtn(){
@@ -104,26 +108,54 @@ struct ContentView: View {
         self.answerStrNum = self.randomNum
     }
     func nextBtn(){
-        if cycleNum == 9{
-            cycleNum = 0
-        }
-        if choiceNum.count < 10 && cycleNum < 10{
+        
+        
+        if choiceNum.count < targetQusNum{
             self.choiceNum.append(randomNum)
-            choiceAgain()
-        }else{
-            self.randomNum = choiceNum[cycleNum]
+            //print("=count:\(choiceNum.count),randomNum:\(randomNum)==B")
+            choiceAgain() //比較是否有相同隨機數
+
+            indexNum += 1
             cycleNum += 1
+            //print("=randomNum:\(randomNum)==A")
         }
+        
+        //print("index:\(indexNum),count:\(choiceNum.count),randomNum:\(randomNum)")
+        if indexNum == targetQusNum && choiceNum.count == targetQusNum{
+            //print("index:\(indexNum),cyc:\(cycleNum)==B")
+            indexNum = 0
+            cycleNum = 0
+            indexNum += 1
+            self.randomNum = self.choiceNum[indexNum-1]
+            
+            //print("index:\(indexNum),randomNum:\(randomNum),cyc:\(cycleNum)==A")
+        }else if indexNum < targetQusNum && choiceNum.count == targetQusNum{
+            //print("===index:\(indexNum),randomNum:\(randomNum),cyc:\(cycleNum)===first")
+            indexNum += 1
+            //print("===index:\(indexNum),randomNum:\(randomNum),cyc:\(cycleNum)===before")
+            self.randomNum = self.choiceNum[indexNum-1]
+            cycleNum += 1
+            //print("===index:\(indexNum),randomNum:\(randomNum),cyc:\(cycleNum)===after")
+            
+        }
+        
+        //設定下一張圖片
         self.questionImageNum = self.randomNum
+        //print("questionImageNum = \(questionImageNum)")
+        //把圖片和文字隱藏
         self.answerImageNum = 99
         self.answerStrNum = 99
-         
+        //
     }
     func resetBtn(){
         self.choiceNum.removeAll()
+        self.answerImageNum = 99
+        self.answerStrNum = 99
+        self.indexNum = 0
+        self.cycleNum = 0
     }
     func choiceAgain(){
-        let temp = Int.random(in: 0...arcanaCht.count)
+        let temp = Int.random(in: 0...arcanaCht.count-1)
         for i in choiceNum{
             if i == temp{
                 choiceAgain()
@@ -132,13 +164,13 @@ struct ContentView: View {
             }
         }
     }
-    func numArrayStr() -> String{
-        return "\(self.numArray)"
-    }
+
     func choiceStr() -> String{
         return "\(self.choiceNum)"
     }
-    
+    func cycleNumStr() -> String{
+        return "\(self.cycleNum+1)"
+    }
     
 }//ContentView End
 

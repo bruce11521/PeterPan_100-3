@@ -39,7 +39,7 @@ struct QuestionFormat{
         if !imageNameAry.isEmpty && ImageNum <= arcanaCht.count{
             return "\(imageNameAry[ImageNum])"
         }else if ImageNum == 99{
-            return ""
+            return "tarotBackSide"
         }else{
             return "Tarot00"
         }
